@@ -1,71 +1,85 @@
 # Streaming Data Insights with Kafka
 
-This repository contains the implementation of a streaming data pipeline and frequent itemset mining using Apache Kafka, designed as part of the Fundamental of Big Data Analytics (DS2004) course. The system processes and analyzes streaming data from the Amazon metadata dataset to derive insights using advanced algorithms like Apriori and PCY.
+Welcome to our repository dedicated to exploring streaming data insights using Apache Kafka, developed for the Fundamentals of Big Data Analytics (DS2004) course. This project features a Kafka-based streaming data pipeline that processes large-scale e-commerce data to perform real-time analytics with frequent itemset mining algorithms such as Apriori and PCY.
 
-## Dependencies
+## Project Dependencies
 
-* Ubuntu ([install](https://ubuntu.com/download))
-* Kafka ([install](https://kafka.apache.org/downloads))
-* Python ([install](https://www.python.org/downloads/))
-* Jupyter Notebook ([install](https://docs.jupyter.org/en/latest/install.html))
-* pandas ([install](https://pandas.pydata.org/docs/getting_started/install.html))
-* numpy ([install](https://numpy.org/install/))
+Ensure you have the following software installed:
 
-## Project Overview:
+- **Ubuntu**: [Install Ubuntu](https://ubuntu.com/download)
+- **Apache Kafka**: [Install Kafka](https://kafka.apache.org/downloads)
+- **Python**: [Install Python](https://www.python.org/downloads/)
+- **Jupyter Notebook**: [Install Jupyter Notebook](https://docs.jupyter.org/en/latest/install.html)
+- **Pandas**: [Install Pandas](https://pandas.pydata.org/docs/getting_started/install.html)
+- **NumPy**: [Install NumPy](https://numpy.org/install/)
 
-Our project utilizes Apache Kafka to set up a robust streaming data pipeline, handling large volumes of e-commerce data to perform real-time data analytics. By implementing frequent itemset mining algorithms like Apriori and PCY, the system provides valuable insights into customer buying patterns and product associations.
+## Project Overview
+
+This project uses Apache Kafka to build a robust streaming data pipeline, managing large volumes of e-commerce data to perform real-time analytics. The system incorporates algorithms like Apriori and PCY to provide insights into customer buying patterns and product associations.
 
 ## Dataset
 
-We are using the Amazon Metadata dataset, which contains details like product IDs, names, features, and pricing information. This dataset, originally 12 GB, expands to 105 GB when extracted. Our analysis uses a 15 GB sample to ensure manageability and performance.
+We utilize the Amazon Metadata dataset, which contains product IDs, names, features, and pricing information. The dataset is initially 12 GB and expands to 105 GB when extracted. Our analysis is based on a 15 GB subset to ensure manageability and performance.
 
-## Approach and Methodology
+## Detailed Description of Producer and Consumer Scripts
 
-### Data Preprocessing
-First, the Amazon dataset is preprocessed to ensure data quality. This involves cleaning data, formatting it appropriately, and then saving the processed data as a new JSON file. This step is crucial for preparing the dataset for effective streaming.
+### Producer: `producer.py`
 
-### Streaming Pipeline Setup
-1. **Producer Application**: A Python script (`producer.py`) streams preprocessed data into our Kafka system.
-2. **Consumer Applications**: Three separate consumer scripts subscribe to the producer's data and perform various analyses:
-   - `consumer_Apriori.py`: Implements the Apriori algorithm.
-   - `consumer_PCY.py`: Utilizes the PCY algorithm.
-   - `consumer_sentiment_analysis.py`: Conducts an innovative analysis, details of which are described within the script.
+- **Data Loading**: Loads preprocessed JSON data.
+- **Kafka Connection**: Establishes connection with Kafka, setting up the topic and server details.
+- **Streaming Data**: Publishes data to Kafka in a serialized format, ensuring continuous data flow.
+- **Fault Tolerance**: Includes error handling for data streaming issues.
 
-### Database Integration
-Each consumer application is configured to connect to a MongoDB database to store analysis results, making the insights easily accessible and persistent.
+### Consumers: Detailed Workflow
 
-## Implementation Details
+#### `consumer_Apriori.py`
 
-### Files and Scripts
-- `producer.py`: Streams data into Kafka.
-- `consumer_Apriori.py`, `consumer_PCY.py`, `consumer_sentiment_analysis.py`: Consumer scripts that perform data analytics.
-- `setup.sh`: Bash script to initialize Kafka components and run the entire system.
+- **Data Subscription**: Subscribes to Kafka topic for data.
+- **Data Processing**: Applies Apriori algorithm to find frequent itemsets.
+- **Result Storage**: Stores itemsets in MongoDB.
 
-## Usage
+#### `consumer_PCY.py`
 
-### Setting up Kafka
-Ensure Kafka and all its components like Zookeeper are correctly configured and running. Use the official [Kafka documentation](https://kafka.apache.org/documentation/) for guidance.
+- **Data Reception**: Receives data from Kafka topic.
+- **Algorithm Application**: Implements PCY algorithm, using hash tables to improve efficiency.
+- **Storage of Insights**: Stores results in MongoDB.
 
-### Running the Application
-To start the streaming data pipeline and the analytics processes, execute the `setup.sh` bash script:
+#### `consumer_sentiment_analysis.py`
+
+- **Listening to Stream**: Retrieves data from the Kafka stream.
+- **Sentiment Analysis**: Analyzes sentiment of product reviews using NLP techniques.
+- **Data Output**: Stores sentiment results in MongoDB.
+
+### Common Features Across Consumers
+
+- **Scalability**: Designed to handle high data volumes efficiently.
+- **Resilience**: Includes error handling for data streaming and processing interruptions.
+- **Modularity**: Scripts can function independently or together.
+
+## Usage Instructions
+
+To set up and run the project:
+
+1. Ensure all dependencies are installed and configured.
+2. Run the `setup.sh` script:
 
 ```bash
 ./setup.sh
 ```
 
-This script initializes the producer, consumers, and all necessary Kafka components.
+This initializes the producer, consumers, and necessary Kafka components, starting the data streaming and analysis processes.
 
-## Contributors:
+## Contributors
 
-This project exists thanks to the extraordinary people who contributed to it.
-* **[Sharjeel Nadir](i212699@nu.edu.pk)**
-* **[Masroor Bin Rehan](i211707@nu.edu.pk)**
+- **Sharjeel Nadir**: i212699@nu.edu.pk
+- **Masroor Bin Rehan**: i211707@nu.edu.pk
 
-## Notes
-- Ensure all scripts are compatible with your Kafka and database setup.
+## Additional Notes
+
+- Ensure compatibility of all scripts with your Kafka and database setups.
 - Adjustments may be necessary based on your specific environment.
 
-## References:
+## References
 
-* [Apache Kafka](https://kafka.apache.org/)
-* [Pandas Documentation](https://pandas.pydata.org/docs/)
+- [Apache Kafka](https://kafka.apache.org/)
+- [Pandas Documentation](https://pandas.pydata.org/docs/)
