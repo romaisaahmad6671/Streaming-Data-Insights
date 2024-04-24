@@ -57,7 +57,9 @@ This script initializes the producer, consumers, and all necessary Kafka compone
 
 ## Contributors:
 
-This project exists thanks to the collaborative efforts of our team, guided by our instructors.
+This project exists thanks to the extraordinary people who contributed to it.
+* **[Sharjeel Nadir](i212699@nu.edu.pk)**
+* **[Masroor Bin Rehan](i211707@nu.edu.pk)**
 
 ## Notes
 - Ensure all scripts are compatible with your Kafka and database setup.
