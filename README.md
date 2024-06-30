@@ -71,7 +71,7 @@ This initializes the producer, consumers, and necessary Kafka components, starti
 
 ## Contributors
 
-- **Sharjeel Nadir**: i212699@nu.edu.pk
+- **Sharjeel Nadir**: Sharjeelnadir127@gmail.com
 - **Masroor Bin Rehan**: i211707@nu.edu.pk
 
 ## Additional Notes
